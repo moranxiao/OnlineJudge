@@ -12,10 +12,8 @@ int main()
         int main()
         {
             std::cout << "你好 OJ" << std::endl;
-            while(1)
-            {
-                int* a = new int;   
-            }
+
+            std::cerr << "hehe" << std::endl;
             return 0;
         }
     )";
@@ -27,7 +25,7 @@ int main()
     CompileAndRun::Start(test_in_json, &test_out_json);
 
     // std::cout << test_in_json << std::endl;
-    // std::cout << test_out_json << std::endl;
+    std::cout << test_out_json << std::endl;
     Json::Value out_root;
     Json::Reader reader;
     reader.parse(test_out_json,out_root);
