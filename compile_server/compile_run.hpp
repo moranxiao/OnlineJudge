@@ -104,7 +104,6 @@ namespace compile_run{
             int cpu_limit = in_root["cpu_limit"].asInt();
             int mem_limit = in_root["mem_limit"].asInt();
             
-            
             int status = 0;//运行编译的总状态码
             int run_st = 0; //程序运行返回的状态码
             
