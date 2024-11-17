@@ -17,10 +17,10 @@ namespace ns_log{
     };
     
     //开发式日志:[level][file][line]+ 其他信息
-    inline std::ostream& Log(int level,const std::string& file_name,int line)
+    inline std::ostream& Log(const std::string& level,const std::string& file_name,int line)
     {
         std::string message = "[";
-        message += std::to_string(level);
+        message += level;
         message += "]";
         
         message += "[";
@@ -38,5 +38,5 @@ namespace ns_log{
         std::cout << message;
         return std::cout;
     }  
-    #define LOG(level) Log(level,__FILE__,__LINE__)
+    #define LOG(level) Log(#level,__FILE__,__LINE__)
 }

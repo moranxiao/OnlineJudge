@@ -7,6 +7,9 @@
 #include <sys/time.h>
 #include <atomic>
 #include <fstream>
+#include <vector>
+#include <boost/algorithm/string.hpp>
+
 
 namespace ns_util{
     static const std::string Path = "./temp/";
@@ -106,6 +109,17 @@ namespace ns_util{
                     *message += '\n';
                 }
             }
+            return true;
+        }
+    };
+
+    class StringUtil{
+    public:
+        static bool SplitString(const std::string& str,std::vector<std::string>* out,const std::string& sep)
+        {
+            if(!out) return false;
+            out->clear();
+            boost::algorithm::split(*out,str,boost::is_any_of(sep),boost::token_compress_on);        
             return true;
         }
     };

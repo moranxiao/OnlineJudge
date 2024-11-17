@@ -60,6 +60,6 @@ int main(int argc,char* argv[])
         resp.set_content(out_json,"application/json;charset=utf-8");
     });
     
-    svr.listen("0.0.0.0", 8080);
+    svr.listen("0.0.0.0", atoi(argv[1]));
     return 0;
 }
