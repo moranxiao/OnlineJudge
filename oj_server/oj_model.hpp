@@ -80,7 +80,7 @@ namespace ns_model{
 
         bool GetAllQuestions(std::vector<Question>* questions)
         {
-            if(!_questions.empty() || !questions)
+            if(_questions.empty() || !questions )
             {
                 LOG(ERROR) << "用户获取题库失败" << "\n";
                 return false;

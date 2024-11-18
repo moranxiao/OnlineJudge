@@ -1,6 +1,8 @@
 #include <iostream>
+#include <jsoncpp/json/json.h>
 
 #include "../comm/httplib.h"
+#include "oj_control.hpp"
 
 using namespace httplib;
 
@@ -8,6 +10,8 @@ void Usage(const std::string& proc)
 {
     std::cout << "Usage:" << proc << ' ' << "port" << std::endl;
 }
+
+using namespace ns_control;
 
 int main(int argc,char* argv[])
 {
@@ -18,22 +22,31 @@ int main(int argc,char* argv[])
     }
     Server svr;
 
+    Control ctrl;
     //路由功能
-    svr.Get("/all_questions", [](const Request& req,Response& resp){
+    svr.Get("/all_questions", [&ctrl](const Request& req,Response& resp){
         //获取所有题目
         std::string html;
         
-        html = "这是所有的题目";
+        ctrl.AllQuestions(&html);
 
         resp.set_content(html,"text/html;charset=utf-8");
     });
 
-    svr.Get(R"(/one_question/(\d+))", [](const Request& req,Response& resp){
-        
+    svr.Get(R"(/one_question/(\d+))", [&ctrl](const Request& req,Response& resp){
+        std::string html;
+        std::string id = req.matches[1];
+        ctrl.OneQuestion(id,&html);
+
+        resp.set_content(html,"text/html;charset=utf-8");
     });
 
-    svr.Post(R"(/judge/(\d+))", [](const Request& req,Response& resp){
-        
+    svr.Post(R"(/judge/(\d+))", [&ctrl](const Request& req,Response& resp){
+        std::string id = req.matches[1];
+        std::string in_json = req.body;
+        std::string out_json;
+        ctrl.Judge(id,in_json,&out_json);
+        resp.set_content(out_json,"application/json;charset=utf-8");
     });
     svr.set_base_dir("./wwwroot");
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moran的在线OJ</title>
+</head>
+<body>
+    <h1>所有题目</h1>
+    <table>
+        <tr>
+            <th>题目编号</th>
+            <th>题目名称</th>
+            <th>题目难度</th>
+        </tr>
+        {{#questions_num}}
+        <tr>
+            <td>{{id}}</td>
+            <td><a href="/one_question/{{id}}">{{title}}</a></td>
+            <td>{{difficulty}}</td>
+        </tr>
+        {{/questions_num}}
+    </table>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyOJ:{{title}}</title>
+    <style>
+        textarea {
+            background-color: #f4f4f4; /* 背景色 */
+            padding: 10px; /* 内边距 */
+            border-radius: 5px; /* 圆角 */
+            border: 1px solid #ccc; /* 边框 */
+            font-family: Consolas, monospace; /* 设置等宽字体 */
+            white-space: pre-wrap; /* 自动换行 */
+            word-wrap: break-word; /* 超长单词换行 */
+        }
+    </style>
+</head>
+<body>
+    <h1>{{id}}.{{title}} {{difficulty}}</h1> <!-- 移除 pre 标签，正确放置 h1 标签 -->
+    <p style="white-space: pre-line;">{{desc}}</p>
+
+    <textarea>{{code}}</textarea>
+</body>
+</html>
