@@ -1,4 +1,4 @@
-#ifndef COMPILER_ONLINE
+#ifndef ONLINE_COMPILE
 #include "prev_code.cpp"
 #endif
 

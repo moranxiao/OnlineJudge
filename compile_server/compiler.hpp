@@ -46,7 +46,7 @@ namespace ns_compiler
 
                 //子进程替换为g++,编译源文件
                 execlp("g++","g++", "-o", PathUtil::Exec(file_name).c_str(),\
-                PathUtil::Src(file_name).c_str(),"--std=c++11",nullptr);
+                PathUtil::Src(file_name).c_str(),"-D", "ONLINE_COMPILE" ,"--std=c++11", nullptr);
                 
                 LOG(ERROR) << "进程替换失败" << std::endl;
                 exit(2);
