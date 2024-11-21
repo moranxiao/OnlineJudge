@@ -97,7 +97,7 @@ namespace ns_control{
         }
 
         //将下线主机全部上线策略
-        void OnlineMachine()
+        void OnlineMachines()
         {
             _mtx.lock();
             _onlines.insert(_onlines.end(),_offlines.begin(),_offlines.end());
@@ -176,6 +176,11 @@ namespace ns_control{
 
     class Control{
     public:
+
+        void Recovery()
+        {
+            _load_blance.OnlineMachines();
+        }
         bool AllQuestions(std::string* html)
         {
             if(!html) return false;

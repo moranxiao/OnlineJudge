@@ -22,7 +22,7 @@ namespace ns_view{
 
             for(const auto& q : questions)
             {
-                TemplateDictionary* row_dict = root.AddSectionDictionary("questions_num");
+                TemplateDictionary* row_dict = root.AddSectionDictionary("question_list");
                 row_dict->SetValue("id",q._id);
                 row_dict->SetValue("title",q._title);
                 row_dict->SetValue("difficulty",q._difficulty);
@@ -37,7 +37,7 @@ namespace ns_view{
             TemplateDictionary root("one_question");
 
             root.SetValue("id",quest._id);
-            root.SetValue("code",quest._prev_code);
+            root.SetValue("prev_code",quest._prev_code);
             root.SetValue("title",quest._title);
             root.SetValue("difficulty",quest._difficulty);
             root.SetValue("desc",quest._desc);

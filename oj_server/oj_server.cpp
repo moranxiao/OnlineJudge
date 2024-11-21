@@ -13,6 +13,13 @@ void Usage(const std::string& proc)
 
 using namespace ns_control;
 
+Control* ptr_ctrl = nullptr;
+
+void Recovery(int signo)
+{
+    ptr_ctrl->Recovery();    
+}
+
 int main(int argc,char* argv[])
 {
     if(argc != 2)
@@ -20,9 +27,14 @@ int main(int argc,char* argv[])
         Usage(argv[0]);
         exit(1);
     }
+
+    //设置某个信号，当对oj_server发出这个信号时，负载均衡将重启所有主机
+    signal(SIGQUIT, Recovery);
     Server svr;
 
     Control ctrl;
+
+    ptr_ctrl = &ctrl;
     //路由功能
     svr.Get("/all_questions", [&ctrl](const Request& req,Response& resp){
         //获取所有题目
@@ -33,7 +45,7 @@ int main(int argc,char* argv[])
         resp.set_content(html,"text/html;charset=utf-8");
     });
 
-    svr.Get(R"(/one_question/(\d+))", [&ctrl](const Request& req,Response& resp){
+    svr.Get(R"(/question/(\d+))", [&ctrl](const Request& req,Response& resp){
         std::string html;
         std::string id = req.matches[1];
         ctrl.OneQuestion(id,&html);
