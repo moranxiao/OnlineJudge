@@ -6,7 +6,7 @@
 #include <fstream>
 #include <cassert>
 
-#include "oj_model.hpp"
+#include "oj_model2.hpp"
 #include "oj_view.hpp"
 #include "../comm/httplib.h"
 #include "../comm/util.hpp"
