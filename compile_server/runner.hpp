@@ -56,8 +56,7 @@ namespace ns_runner{
                 LOG(ERROR) << "打开标准文件错误" << std::endl;
                 return -1; //代表打开文件失败
             }
-            
-            std::cout << cpu << ' '<<memory << std::endl;
+
 
             pid_t pid = fork();
             if(pid < 0)

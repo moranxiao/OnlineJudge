@@ -40,6 +40,7 @@ namespace ns_compiler
                     LOG(ERROR) << "打开compile_error文件失败" << std::endl;
                     exit(1);
                 }
+                
                 //标准错误重定向到compile_err_name文件中
                 //如果oldfd打开且合法，就不会出错
                 dup2(file_compile_error,2);

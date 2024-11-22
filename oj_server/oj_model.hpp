@@ -43,7 +43,11 @@ namespace ns_model{
                 exit(1);
             }
         }
-
+        void DisplayOneQuestion(const std::string& id)
+        {
+            Question q = _questions[id];
+            LOG(DEBUG) << id << ":" << q._cpu_limit << '|' << q._mem_limit << "\n";
+        }
         bool LoginQuestionsList()
         {
             std::string line;

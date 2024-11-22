@@ -17,7 +17,7 @@ namespace compile_run{
     class CompileAndRun{
     public:
 
-                static void RemoveFile(const std::string& file_name)
+        static void RemoveFile(const std::string& file_name)
         {
             std::string exe_path = PathUtil::Exec(file_name);
             if(FileUtil::IsExistPathName(exe_path))
@@ -103,6 +103,7 @@ namespace compile_run{
             std::string input = in_root["input"].asString();
             int cpu_limit = in_root["cpu_limit"].asInt();
             int mem_limit = in_root["mem_limit"].asInt();
+
             
             int status = 0;//运行编译的总状态码
             int run_st = 0; //程序运行返回的状态码
@@ -134,6 +135,7 @@ namespace compile_run{
             }
             
             run_st = Runner::Run(file_name,cpu_limit,mem_limit);
+
             if(run_st < 0)
             {
                 status = -2; //未知错误

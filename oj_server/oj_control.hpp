@@ -214,7 +214,6 @@ namespace ns_control{
             //先得到此题信息
             Question quest;
             if(!_model.GetOneQuestion(question_id,&quest)) return;
-            
             Json::Reader reader;
             Json::Value root;
             reader.parse(in_json,root);
@@ -226,7 +225,7 @@ namespace ns_control{
             //一定要加\n，如果不加会导致test_code.cpp里的条件编译和prev_code.cpp的代码连在一起，以至于无法消除条件编译
             compile_root["code"] = prev_code + "\n" +quest._test_code;
             compile_root["input"] = input;
-            compile_root["cup_limit"] = quest._cpu_limit;
+            compile_root["cpu_limit"] = quest._cpu_limit;
             compile_root["mem_limit"] = quest._mem_limit;
 
             Json::StyledWriter writer;
