@@ -192,6 +192,11 @@ namespace ns_control{
                 return false;
             }
             
+            std::sort(questions.begin(),questions.end(),[](const Question& q1,const Question& q2)
+            {
+                return stoi(q1._id) < stoi(q2._id);
+            });
+
             _view.ShowAllQuestion(questions,html);
             
             return true;
