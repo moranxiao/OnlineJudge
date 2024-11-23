@@ -99,6 +99,8 @@ namespace compile_run{
             Json::Reader read;
             read.parse(in_json,in_root);
 
+            //获取输入
+
             std::string code = in_root["code"].asString();
             std::string input = in_root["input"].asString();
             int cpu_limit = in_root["cpu_limit"].asInt();
@@ -170,6 +172,7 @@ namespace compile_run{
             {
                 *out_json = writer.write(out_root);
             }
+            //移除临时文件
             RemoveFile(file_name);
         }
     };

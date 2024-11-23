@@ -37,6 +37,9 @@ namespace ns_log{
         
         std::cout << message;
         return std::cout;
-    }  
+    }
+    //在预处理中，#是字符串化操作符，可以直接将宏参数转换为字符串字面量
+    //__FILE__宏，在编译时直接替换为文件名
+    //__LINE__宏，在编译时直接替换为代码行数
     #define LOG(level) Log(#level,__FILE__,__LINE__)
 }

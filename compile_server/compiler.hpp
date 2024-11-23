@@ -56,6 +56,7 @@ namespace ns_compiler
             {
                 //父进程
                 waitpid(pid,nullptr,0);
+                //如果没有形成可执行文件，表示编译出错
                 if( !FileUtil::IsExistPathName(PathUtil::Exec(file_name)) )
                 {
                     LOG(INFO) << "代码编译错误" << std::endl;
