@@ -10,6 +10,7 @@
 #include "oj_view.hpp"
 #include "../comm/httplib.h"
 #include "../comm/util.hpp"
+#include "server.pb.h"
 
 namespace ns_control{
     using namespace ns_model;
@@ -226,16 +227,17 @@ namespace ns_control{
             std::string input = root["input"].asString();
 
             //构建编译运行的json串
-            Json::Value compile_root;
-            //一定要加\n，如果不加会导致test_code.cpp里的条件编译和prev_code.cpp的代码连在一起，以至于无法消除条件编译
-            compile_root["code"] = prev_code + "\n" +quest._test_code;
-            compile_root["input"] = input;
-            compile_root["cpu_limit"] = quest._cpu_limit;
-            compile_root["mem_limit"] = quest._mem_limit;
+            server::Question compile_proto;
 
-            Json::StyledWriter writer;
-            std::string judge_json = writer.write(compile_root);
-            
+            //一定要加\n，如果不加会导致test_code.cpp里的条件编译和prev_code.cpp的代码连在一起，以至于无法消除条件编译
+            compile_proto.set_code(prev_code + "\n" +quest._test_code);
+            compile_proto.set_input(input);
+            compile_proto.set_cpu_limit(quest._cpu_limit);
+            compile_proto.set_mem_limit(quest._mem_limit);
+
+
+            std::string judge_proto;
+            compile_proto.SerializeToString(&judge_proto);
             //负载均衡的选择主机进行判题任务
             int id;
             Machine* m;
@@ -248,7 +250,7 @@ namespace ns_control{
                 m->IncLoad();
                 httplib::Client client(m->_ip,m->_port);
                 LOG(INFO) << "选择主机成功,主机id: " << id << " 详情: " << m->_ip << ":" << m->_port << " 当前主机的负载是: " << m->Load() << "\n";
-                if(auto res = client.Post("/compile_and_run",judge_json,"application/json;charset=utf-8"))
+                if(auto res = client.Post("/compile_and_run",judge_proto,""))
                 {
                     if(res->status = 200)
                     {

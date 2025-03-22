@@ -23,11 +23,11 @@ namespace ns_model{
         int _mem_limit;
     };
 
-    std::string table_name = "题目表名";
-    std::string ip = "mysql服务端ip";
-    std::string user_name = "用户名";
-    std::string password = "密码";
-    std::string database = "数据库名字";
+    std::string table_name = "questions";
+    std::string ip = "127.0.0.1";
+    std::string user_name = "manager";
+    std::string password = "";
+    std::string database = "OnlineJudge";
     uint32_t port = 3306;/*数据库端口号*/
 
     class Model{

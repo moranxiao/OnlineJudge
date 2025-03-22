@@ -7,6 +7,7 @@
 #include "../comm/util.hpp"
 
 #include <jsoncpp/json/json.h>
+#include "compile_run.pb.h"
 
 namespace compile_run{
     using namespace ns_log;
@@ -93,20 +94,18 @@ namespace compile_run{
          * stdout:程序输出结果
          * stderr:程序运行完的错误信息
         */
-        static void Start(const std::string& in_json,std::string* out_json)
+        static void Start(const std::string& in_proto,std::string* out_json)
         {
-            Json::Value in_root;
-            Json::Reader read;
-            read.parse(in_json,in_root);
-
+            compile_run::Question quest;
+            quest.ParseFromString(in_proto);
             //获取输入
 
-            std::string code = in_root["code"].asString();
-            std::string input = in_root["input"].asString();
-            int cpu_limit = in_root["cpu_limit"].asInt();
-            int mem_limit = in_root["mem_limit"].asInt();
+            std::string code = quest.code();
+            std::string input = quest.input();
+            int cpu_limit = quest.cpu_limit();
+            int mem_limit = quest.mem_limit();
 
-            
+
             int status = 0;//运行编译的总状态码
             int run_st = 0; //程序运行返回的状态码
             

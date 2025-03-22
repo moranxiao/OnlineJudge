@@ -1,0 +1,9 @@
+syntax = "proto3";
+package server;
+
+message Question{
+    string code = 1;
+    string input = 2;
+    int32 cpu_limit = 3;
+    int32 mem_limit = 4;
+}

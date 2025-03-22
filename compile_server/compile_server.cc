@@ -49,11 +49,11 @@ int main(int argc,char* argv[])
     }
     Server svr;
     svr.Post("/compile_and_run",[](const Request& req,Response& resp){
-        std::string in_json = req.body;
+        std::string in_proto = req.body;
         std::string out_json;
-        if(in_json.empty())
+        if(in_proto.empty())
             return;
-        CompileAndRun::Start(in_json,&out_json);
+        CompileAndRun::Start(in_proto,&out_json);
         resp.set_content(out_json,"application/json;charset=utf-8");
     });
     

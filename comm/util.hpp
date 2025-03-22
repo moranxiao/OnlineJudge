@@ -75,6 +75,7 @@ namespace ns_util{
         static std::string GetUniqeFileName()
         {
             static std::atomic<size_t> id(0);
+            id++;
             int ms = TimeUtil::GetMsStamp();
             std::string res;
             res += std::to_string(ms);
